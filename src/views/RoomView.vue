@@ -449,6 +449,11 @@ onMounted(() => {
       config: {
         iceServers: [
           { urls: 'stun:stun.l.google.com:19302' },
+          {
+            urls: 'turn:openrelay.metered.ca:80',
+            username: 'openrelayproject',
+            credential: 'openrelayproject',
+          },
           // Add TURN here for full mobile support
         ],
       },
