@@ -427,8 +427,32 @@ onMounted(() => {
   client = new window.WebTorrent()
   const { id } = route.params
   if (typeof id !== 'string') return console.error('No id on this page')
-  if (host && typeof id === 'string') peer.value = new Peer(id)
-  else peer.value = new Peer()
+  if (host && typeof id === 'string')
+    peer.value = new Peer(id, {
+      host: '0.peerjs.com',
+      port: 443,
+      path: '/',
+      secure: true,
+      config: {
+        iceServers: [
+          { urls: 'stun:stun.l.google.com:19302' },
+          // Add TURN here for full mobile support
+        ],
+      },
+    })
+  else
+    peer.value = new Peer(v4(), {
+      host: '0.peerjs.com',
+      port: 443,
+      path: '/',
+      secure: true,
+      config: {
+        iceServers: [
+          { urls: 'stun:stun.l.google.com:19302' },
+          // Add TURN here for full mobile support
+        ],
+      },
+    })
   peer.value.on('open', () => {
     if (!peer.value || host) return
     const con = peer.value.connect(id)
