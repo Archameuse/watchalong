@@ -427,40 +427,8 @@ onMounted(() => {
   client = new window.WebTorrent()
   const { id } = route.params
   if (typeof id !== 'string') return console.error('No id on this page')
-  if (host && typeof id === 'string')
-    peer.value = new Peer(id, {
-      host: '0.peerjs.com',
-      port: 443,
-      path: '/',
-      secure: true,
-      config: {
-        iceServers: [
-          { urls: 'stun:stun.l.google.com:19302' },
-          {
-            urls: 'turn:openrelay.metered.ca:80',
-            username: 'openrelayproject',
-            credential: 'openrelayproject',
-          },
-        ],
-      },
-    })
-  else
-    peer.value = new Peer(v4(), {
-      host: '0.peerjs.com',
-      port: 443,
-      path: '/',
-      secure: true,
-      config: {
-        iceServers: [
-          { urls: 'stun:stun.l.google.com:19302' },
-          {
-            urls: 'turn:openrelay.metered.ca:80',
-            username: 'openrelayproject',
-            credential: 'openrelayproject',
-          },
-        ],
-      },
-    })
+  if (host && typeof id === 'string') peer.value = new Peer(id)
+  else peer.value = new Peer(v4())
   peer.value.on('open', () => {
     if (!peer.value || host) return
     const con = peer.value.connect(id)
