@@ -145,6 +145,7 @@ const search = async () => {
   animes.value = []
   animeId.value = ''
   isLoading.value = true
+  console.log(import.meta.env.VITE_API_URL)
   const data: Anime[] = await fetch(
     import.meta.env.VITE_API_URL +
       '/api/search?' +
@@ -152,7 +153,10 @@ const search = async () => {
         query: searchAnime.value,
       }),
   )
-    .then((resp) => resp.json())
+    .then((resp) => {
+      console.log(resp)
+      return resp.json()
+    })
     .then((json) => json.results)
     .catch((e) => console.error(e))
   isLoading.value = false

@@ -83,8 +83,9 @@ import { v4 } from 'uuid'
 import { onMounted, onUnmounted, watch } from 'vue'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
-import WebTorrent from 'webtorrent'
+import type WebTorrent from 'webtorrent'
 
+// let client: WebTorrent.Instance | null = null
 let client: WebTorrent.Instance | null = null
 
 const videoPlayerRef = ref<InstanceType<typeof VideoPlayer> | null>(null)
