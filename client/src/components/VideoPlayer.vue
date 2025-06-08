@@ -207,7 +207,7 @@ async function setupSource() {
     // it plays muted for literally no reason but i cant do anything about it
     const referer = 'kiwik.si' // or the domain that must be sent as ref
     const headers = encodeURIComponent(JSON.stringify({ Referer: 'https://kiwik.si' }))
-    const finishedUrl = `https://slave.4lpharius.workers.dev/proxy?url=${encodeURIComponent(url)}&headers=${headers}`
+    const finishedUrl = `${import.meta.env.VITE_PROXY_URL}/proxy?url=${encodeURIComponent(url)}&headers=${headers}`
     // const finishedUrl = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
     sPlayer = new shaka.Player()
     sPlayer.attach(video).then(async () => {
